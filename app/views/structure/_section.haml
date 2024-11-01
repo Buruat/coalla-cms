@@ -1,0 +1,10 @@
+.col-lg-4.col-md-6.col-sm-12
+  .well.well-lg
+    %h3
+      = link_to section.name.html_safe, section.path
+      - if section.show_menu_counter? && section.counter
+        &nbsp;
+        %span.badge.badge-primary
+          = section.counter.call
+    - if section.description
+      %p= section.description

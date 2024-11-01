@@ -1,0 +1,15 @@
+.page-header
+  %h1= resource_model.model_name.human
+
+= actions do
+  = create_link
+
+= table_for(resource_model).content(resources) do |t|
+  <% @table_columns.each do |column| %><% if @reflections[column[0]] %>- t.column :<%= @reflections[column[0]].name %>, format: ->(c) { c.try(:<%= cms_select_name(@reflections[column[0]].klass) %>) }<% else %>- t.column :<%= column[0]%><% end %>
+  <% end %>- t.edit
+  - t.delete
+
+= admin_paginate resources
+
+= actions do
+  = create_link

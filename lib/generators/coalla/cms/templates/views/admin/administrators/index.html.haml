@@ -1,0 +1,15 @@
+.page-header
+  %h1= resource_model.model_name.human
+
+= actions do
+  = create_link
+
+= table_for(resource_model).content(resources) do |t|
+  - t.column :email
+  - t.edit
+  - t.delete if: ->(admin) { current_administrator != admin }
+
+= admin_paginate resources
+
+= actions do
+  = create_link

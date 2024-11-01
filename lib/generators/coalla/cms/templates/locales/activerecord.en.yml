@@ -1,0 +1,29 @@
+en:
+  activerecord:
+    models:
+      administrator: Administrators
+      lookup: Settings
+      site_meta_tags: Meta-Tags
+    structure:
+      administrator: Administrators list management
+
+    attributes:
+      administrator:
+        email: Email
+        password: Password
+      lookup:
+        code: Name
+        value: Value
+        file_name: Filename
+      site_meta_tags:
+        identifier: Identifier
+        identifier_text: Page identifier
+        site: Site
+        title: Title
+        description: Description
+        image: Image
+        url: URL
+        og_title: Title
+        og_description: Description
+        og_image: Image
+        og_url: URL

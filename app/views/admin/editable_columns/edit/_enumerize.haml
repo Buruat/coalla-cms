@@ -1,0 +1,2 @@
+.form-group
+  = builder.select options.column, controller_model.send(options.column).options, {}, class: 'form-control'

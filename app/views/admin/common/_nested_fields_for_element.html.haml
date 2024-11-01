@@ -1,0 +1,21 @@
+.fields_container{style: (builder.object.try(:marked_for_destruction?) ? 'display:none;' : 'position:relative'), class: 'well'}
+  - if !options[:include_id] && builder.object.try(:persisted?)
+    = builder.hidden_field :id
+  - if options[:sort] || options[:destroy]
+    .row.form-group
+      .col-md-2.col-xs-2
+        - if options[:sort]
+          = link_to '#', data: {sort_up: true} do
+            %i.glyphicon.glyphicon-arrow-up
+          = link_to '#', data: {sort_down: true} do
+            %i.glyphicon.glyphicon-arrow-down
+      .col-md-1.col-md-offset-9.col-xs-1.col-xs-offset-8
+        - if options[:destroy]
+          = link_to '#', class: 'btn btn-danger remove_field' do
+            %i.glyphicon.glyphicon-trash
+  - if options[:destroy]
+    = builder.hidden_field :_destroy
+  - if block.present?
+    = capture(builder, options, &block)
+  - else
+    = render partial, builder: builder, options: options

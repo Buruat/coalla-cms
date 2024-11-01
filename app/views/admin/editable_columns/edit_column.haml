@@ -1,0 +1,8 @@
+= twitter_form_for item, url: url_for(action: :update_column, id: item), method: :put, remote: true, as: :item, html: {class: 'form-inline', data: {editable_column_form: true}} do |f|
+  = hidden_field_tag :column, options.column
+  = hidden_field_tag :custom, options.custom
+  = render partial: column_partial, locals: {builder: f, options: options}
+  = button_tag type: 'submit', class: 'btn btn-success btn-sm' do
+    %i.glyphicon.glyphicon-ok
+  = button_tag type: 'button', class: 'btn btn-default btn-sm', data: {editable_column_cancel: true} do
+    %i.glyphicon.glyphicon-remove

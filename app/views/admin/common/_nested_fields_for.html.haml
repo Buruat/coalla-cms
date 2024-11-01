@@ -1,0 +1,11 @@
+- partial = "#{collection.to_s.singularize}_fields"
+= field_set section_name, data: {sortable_blocks: options[:sort]} do
+  = f.fields_for collection, record_object, options do |builder|
+    = render('admin/common/nested_fields_for_element', builder: builder, partial: partial, options: options, block: block)
+  - if options[:add]
+    .nested_buttons
+      - new_object = f.object.send(collection).klass.new
+      - id = new_object.object_id
+      - fields = f.fields_for(collection, new_object, options.merge(child_index: id)) do |builder|
+        = render('admin/common/nested_fields_for_element', builder: builder, partial: partial, options: options, block: block)
+      = link_to(t('admin.common.new'), '#', class: 'add_fields btn btn-success', data: {id: id, fields: fields.gsub("\n", '')})

@@ -1,0 +1,5 @@
+%h1= SiteMetaTags.model_name.human
+
+= table_for(SiteMetaTags).content(@meta_tags) do |t|
+  - t.column :identifier_text
+  - t.edit

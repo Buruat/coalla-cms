@@ -1,0 +1,6 @@
+= form_tag "###URL###", multipart: true, remote: true, style: 'display: none;', method: :post do
+  = hidden_field_tag :authenticity_token, form_authenticity_token
+  = hidden_field_tag :container, '###CONTAINER###', id: nil
+  = hidden_field_tag :version,   '###VERSION###', id: nil
+  = hidden_field_tag :free_size,   '###FREE_SIZE###', id: nil
+  = file_field_tag :image, id: nil

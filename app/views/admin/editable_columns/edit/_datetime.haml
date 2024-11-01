@@ -1,0 +1,3 @@
+.form-group
+  - value = builder.object.try(options.column).try(:strftime, '%Y-%m-%d %H:%M')
+  = builder.text_field options.column, class: 'form-control', data: {calendar_datetime: true}, value: value

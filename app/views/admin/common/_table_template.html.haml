@@ -1,0 +1,33 @@
+.table-responsive
+  %table.table.table-striped
+    %thead
+      %tr
+        - definitions.each do |definition|
+          %th{class: th_class(definition)}
+            - if !definition.sort
+              = definition.title
+            - else
+              - url_params = params.permit!.to_h
+              - sort_by, sort_direction = sort_order.split("\s")
+              - if definition.sort == sort_by
+                - arrow_class = sort_direction == 'desc' ? 'glyphicon-sort-by-attributes-alt' : 'glyphicon-sort-by-attributes'
+                - direction = sort_direction == 'desc' ? 'asc' : 'desc'
+                = link_to url_for(url_params.merge(sort_by: sort_by, sort_direction: direction)) do
+                  = "#{definition.title}&nbsp;<i class='glyphicon #{arrow_class}'></i>".html_safe
+              - else
+                = link_to url_for(url_params.merge(sort_by: definition.sort, sort_direction: 'asc')) do
+                  = "#{definition.title}&nbsp;<i class='glyphicon glyphicon-sort'></i>".html_safe
+    %tbody
+      - items.each do |item|
+        %tr{class: tr_class(row_class, item)}
+          - definitions.each do |definition|
+            - if definition.edit
+              - edit = definition.edit.dup
+              - url_option = edit.delete(:url)
+              - url = url_option.is_a?(Proc) ? url_option.(item) : url_for(action: :edit_column, id: item)
+              - data = {url: url, editable_column: true}.merge(edit).map{|key,value| [key, value.to_s]}.to_h
+              %td{class: td_class(definition), data: data}<
+                = definition.value(item, self)
+            - else
+              %td{class: td_class(definition)}<
+                = definition.value(item, self)
